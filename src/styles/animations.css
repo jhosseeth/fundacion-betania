@@ -1,0 +1,52 @@
+/* ============================================================
+   ANIMACIONES — Fundación Betania
+   Keyframes y clases de animación reutilizables.
+   Todas respetan prefers-reduced-motion (ya en global.css).
+   ============================================================ */
+
+/* --- Fade up al entrar al viewport --- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Fade in simple --- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* --- Pulso suave (WhatsApp flotante) --- */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.08); }
+}
+
+/* --- Count up (para números de impacto) --- */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Clases utilitarias --- */
+.animate-fade-up {
+  animation: fadeUp 500ms ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 400ms ease-out both;
+}
+
+/* Stagger: aplica delay a hijos directos para animaciones en cascada */
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 80ms; }
+.stagger > *:nth-child(3) { animation-delay: 160ms; }
+.stagger > *:nth-child(4) { animation-delay: 240ms; }
+.stagger > *:nth-child(5) { animation-delay: 320ms; }
+.stagger > *:nth-child(6) { animation-delay: 400ms; }

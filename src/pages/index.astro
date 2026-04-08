@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout>
+  <main>
+    <h1>Fundación Betania</h1>
+    <p>Sitio en construcción — stack listo ✓</p>
+  </main>
+</BaseLayout>
+
+<style>
+  main {
+    display: grid;
+    place-content: center;
+    min-height: 100svh;
+    text-align: center;
+    gap: var(--space-4);
+  }
+
+  h1 {
+    color: var(--color-primary);
+  }
+
+  p {
+    color: var(--color-text-muted);
+    max-width: unset;
+  }
+</style>

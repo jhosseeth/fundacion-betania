@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Vasija (jar shape) — símbolo de la marca Betania -->
+  <path
+    d="M10 8 C8 8 6 10 6 14 L7 24 C7 26 9 27 16 27 C23 27 25 26 25 24 L26 14 C26 10 24 8 22 8 Z"
+    fill="#3f4eb5"
+  />
+  <!-- Llama + Paloma en negativo -->
+  <path
+    d="M16 12 C14 14 13 16 14 18 C14.5 19.5 16 20 16 20 C16 20 17.5 19.5 18 18 C19 16 18 14 16 12 Z"
+    fill="#ffd370"
+  />
+</svg>
