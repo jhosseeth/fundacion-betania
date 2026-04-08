@@ -8,7 +8,7 @@ export const SITE = {
   tagline: 'Una casa donde la vida vuelve a comenzar',
   description:
     'Fundación Betania — Restauración integral para familias de la comunidad. Anunciando a Jesucristo como esperanza viva.',
-  url: 'https://jhosseeth.github.io/fundacion-betania',
+  url: 'https://fundacionbetania.co',
 
   // Contacto
   whatsapp: {
