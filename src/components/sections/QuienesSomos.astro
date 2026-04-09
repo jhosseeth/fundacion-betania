@@ -100,12 +100,27 @@ const VALORES = [
 
   <!-- ══════════ E) Declaración final ══════════ -->
   <div class="qs-declaracion-wrapper container">
-    <div class="qs-declaracion">
-      <p class="qs-declaracion__text">
-        Creemos que lo que hoy parece vulnerable será testimonio de resurrección. Betania será
-        una casa donde el perfume de la entrega llene el barrio y donde muchas familias vuelvan
-        a vivir.
-      </p>
+    <div class="qs-declaracion-row">
+      <!-- Logo principal -->
+      <div class="qs-declaracion-logo" aria-hidden="true">
+        <img
+          src="/logo-trimmed.png"
+          alt=""
+          class="qs-declaracion-logo-img"
+          width="400"
+          height="428"
+          loading="lazy"
+        />
+      </div>
+
+      <!-- Card texto -->
+      <div class="qs-declaracion">
+        <p class="qs-declaracion__text">
+          Creemos que lo que hoy parece vulnerable será testimonio de resurrección. Betania será
+          una casa donde el perfume de la entrega llene el barrio y donde muchas familias vuelvan
+          a vivir.
+        </p>
+      </div>
     </div>
   </div>
 
@@ -369,17 +384,67 @@ const VALORES = [
     }
   }
 
+  /* Row: logo + card — mobile: apilado, desktop: 2 columnas */
+  .qs-declaracion-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .qs-declaracion-row {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-10);
+    }
+  }
+
+  /* Columna logo */
+  .qs-declaracion-logo {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .qs-declaracion-logo-img {
+    width: clamp(180px, 35vw, 280px);
+    height: auto;
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .qs-declaracion-logo-img {
+      width: clamp(220px, 28vw, 340px);
+    }
+  }
+
+  /* Columna card */
   .qs-declaracion {
     background-color: var(--color-cream-dark);
     border-radius: var(--radius-xl);
     padding: var(--space-8) var(--space-6);
     text-align: center;
     position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin-inline: auto;
   }
 
   @media (min-width: 768px) {
     .qs-declaracion {
-      padding: var(--space-12) var(--space-16);
+      padding: var(--space-10) var(--space-10);
+      max-width: 420px;
+      margin-inline: 0;
+      margin-left: auto;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .qs-declaracion {
+      max-width: 460px;
+      padding: var(--space-12) var(--space-12);
     }
   }
 
