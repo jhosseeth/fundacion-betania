@@ -1,0 +1,84 @@
+---
+// ValueCard.astro — Tarjeta de valor institucional
+// El grid (2 col mobile / 4 col desktop) lo define el componente padre
+
+interface Props {
+  icon: string;   // emoji
+  titulo: string;
+  descripcion: string;
+}
+
+const { icon, titulo, descripcion } = Astro.props;
+---
+
+<article class="value-card">
+  <div class="value-card__icon-wrapper" aria-hidden="true">
+    <span class="value-card__icon">{icon}</span>
+  </div>
+  <h3 class="value-card__title">{titulo}</h3>
+  <p class="value-card__description">{descripcion}</p>
+</article>
+
+<style>
+  .value-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-3);
+    padding: var(--space-5);
+  }
+
+  /* ---- Ícono ---- */
+  .value-card__icon-wrapper {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: rgba(139, 199, 173, 0.2); /* support suave */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background-color var(--transition-base), transform var(--transition-base);
+  }
+
+  .value-card:hover .value-card__icon-wrapper {
+    background-color: rgba(255, 211, 112, 0.3); /* accent suave en hover */
+    transform: scale(1.06);
+  }
+
+  .value-card__icon {
+    font-size: 1.875rem; /* ~30px — dentro del círculo de 64px */
+    line-height: 1;
+    display: block;
+  }
+
+  /* ---- Texto ---- */
+  .value-card__title {
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: var(--font-extrabold);
+    color: var(--color-text);
+    line-height: 1.2;
+  }
+
+  @media (min-width: 768px) {
+    .value-card__title {
+      font-size: var(--text-lg);
+    }
+  }
+
+  .value-card__description {
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    max-width: 22ch;
+  }
+
+  @media (min-width: 768px) {
+    .value-card__description {
+      font-size: var(--text-base);
+      max-width: 26ch;
+    }
+  }
+</style>

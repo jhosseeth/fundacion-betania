@@ -1,0 +1,255 @@
+---
+// Historias.astro — Sección 06: Pico emocional — impacto real con fotos y datos
+import { Image } from 'astro:assets';
+import SectionTitle from '../ui/SectionTitle.astro';
+import Button from '../ui/Button.astro';
+
+import fotoComedor from '../../assets/photos/nina-mesa-feliz.jpg';
+import fotoNinos from '../../assets/photos/ninos-abrazo.jpg';
+import fotoOracion from '../../assets/photos/mujeres-oracion.jpg';
+
+const bloques = [
+  {
+    numero: '+700',
+    titulo: 'El comedor que es más que comida',
+    texto:
+      'Cada martes y jueves, entre 80 y 100 personas llegan a nuestra mesa. No solo a comer. Llegan a ser vistas, escuchadas y amadas. Más de 700 raciones al mes que cambian el primer plato del día de muchas familias.',
+    foto: fotoComedor,
+    alt: 'Niña sonriendo mientras come en el comedor comunitario de Betania',
+    dir: 'ltr' as const,
+  },
+  {
+    numero: '40',
+    titulo: '40 niños que están aprendiendo a soñar',
+    texto:
+      'En nuestros talleres de refuerzo escolar, 40 niños descubren que son capaces. Que tienen propósito. Que su barrio no es el límite de su historia.',
+    foto: fotoNinos,
+    alt: 'Cuatro niños abrazados y sonriendo en la fundación',
+    dir: 'rtl' as const,
+  },
+  {
+    numero: '+200',
+    titulo: 'Una comunidad que ora junta',
+    texto:
+      'Los sábados, entre 200 y 300 personas se encuentran. Jóvenes, padres, adultos mayores — todos en la misma mesa, bajo el mismo techo, encontrando esperanza.',
+    foto: fotoOracion,
+    alt: 'Mujeres reunidas en oración en la fundación Betania',
+    dir: 'ltr' as const,
+  },
+];
+---
+
+<section class="historias" id="historias" aria-label="Vidas restauradas">
+  <div class="container">
+    <!-- Encabezado -->
+    <SectionTitle
+      eyebrow="Impacto real"
+      title="Vidas que están siendo restauradas"
+      subtitle="No predicamos esperanza, la acompañamos con formación y acción."
+      light={true}
+    />
+
+    <!-- Bloques de historia -->
+    <div class="historias__bloques">
+      {bloques.map((bloque) => (
+        <article class:list={['historia-bloque', { 'historia-bloque--rtl': bloque.dir === 'rtl' }]}>
+          <!-- Imagen -->
+          <div class="historia-bloque__img-wrap">
+            <Image
+              src={bloque.foto}
+              alt={bloque.alt}
+              class="historia-bloque__img"
+              widths={[480, 768, 900]}
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              quality={85}
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Contenido -->
+          <div class="historia-bloque__content">
+            <p class="historia-bloque__numero" aria-hidden="true">{bloque.numero}</p>
+            <h3 class="historia-bloque__titulo">{bloque.titulo}</h3>
+            <p class="historia-bloque__texto">{bloque.texto}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- CTA final -->
+    <div class="historias__cta">
+      <p class="historias__cta-pregunta">¿Quieres que más historias como esta sean posibles?</p>
+      <Button href="#donaciones" variant="primary" size="lg">
+        Quiero donar
+      </Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ---- Sección base ---- */
+  .historias {
+    background-color: var(--color-primary);
+    padding-block: var(--space-16);
+    overflow: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .historias {
+      padding-block: var(--space-20);
+    }
+  }
+
+  /* ---- Bloques ---- */
+  .historias__bloques {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    margin-top: var(--space-12);
+  }
+
+  @media (min-width: 1024px) {
+    .historias__bloques {
+      gap: var(--space-16);
+    }
+  }
+
+  /* ---- Bloque individual ---- */
+  .historia-bloque {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .historia-bloque {
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: stretch;
+    }
+
+    /* Bloque invertido: contenido primero, imagen segunda */
+    .historia-bloque--rtl {
+      direction: rtl;
+    }
+
+    .historia-bloque--rtl > * {
+      direction: ltr;
+    }
+  }
+
+  /* ---- Imagen ---- */
+  .historia-bloque__img-wrap {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .historia-bloque__img-wrap {
+      aspect-ratio: auto;
+      min-height: 320px;
+    }
+  }
+
+  .historia-bloque__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--transition-slow);
+  }
+
+  .historia-bloque:hover .historia-bloque__img {
+    transform: scale(1.03);
+  }
+
+  /* ---- Contenido ---- */
+  .historia-bloque__content {
+    padding: var(--space-8) var(--space-6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-4);
+    position: relative;
+  }
+
+  @media (min-width: 768px) {
+    .historia-bloque__content {
+      padding: var(--space-10) var(--space-10);
+    }
+  }
+
+  /* Número decorativo grande */
+  .historia-bloque__numero {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: var(--font-extrabold);
+    color: var(--color-accent);
+    line-height: 1;
+    opacity: 0.9;
+    max-width: none;
+  }
+
+  .historia-bloque__titulo {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 3vw, 1.625rem);
+    font-weight: var(--font-extrabold);
+    color: #ffffff;
+    line-height: 1.2;
+    max-width: none;
+  }
+
+  .historia-bloque__texto {
+    font-size: var(--text-base);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 44ch;
+  }
+
+  @media (min-width: 768px) {
+    .historia-bloque__texto {
+      font-size: var(--text-lg);
+    }
+  }
+
+  /* ---- CTA final ---- */
+  .historias__cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+    margin-top: var(--space-16);
+    text-align: center;
+  }
+
+  .historias__cta-pregunta {
+    font-family: var(--font-display);
+    font-size: clamp(1.125rem, 3vw, 1.5rem);
+    font-weight: var(--font-bold);
+    color: rgba(255, 255, 255, 0.92);
+    max-width: 40ch;
+  }
+
+  /* ---- Animaciones ---- */
+  @media (prefers-reduced-motion: no-preference) {
+    .historia-bloque {
+      opacity: 0;
+      transform: translateY(32px);
+      animation: fade-up 600ms ease forwards;
+    }
+
+    .historia-bloque:nth-child(1) { animation-delay: 100ms; }
+    .historia-bloque:nth-child(2) { animation-delay: 220ms; }
+    .historia-bloque:nth-child(3) { animation-delay: 340ms; }
+
+    @keyframes fade-up {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+</style>

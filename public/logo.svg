@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" fill="none" role="img" aria-label="Fundación Betania">
+  <title>Fundación Betania</title>
+  <!-- Fondo azul -->
+  <rect width="200" height="220" rx="16" fill="#3f4eb5"/>
+  <!-- Vasija / Jar shape en cream -->
+  <path d="
+    M 70 30
+    Q 68 22 80 18
+    L 120 18
+    Q 132 22 130 30
+    L 136 38
+    Q 158 42 162 60
+    L 168 90
+    Q 172 120 170 145
+    Q 168 175 155 188
+    Q 140 200 100 200
+    Q 60 200 45 188
+    Q 32 175 30 145
+    L 28 90
+    Q 26 62 50 58
+    L 64 38
+    Z
+  " fill="#faf4e8"/>
+  <!-- Texto "Betania" en tipografía redondeada/bubbly dentro de la vasija -->
+  <!-- B -->
+  <text
+    x="100"
+    y="90"
+    font-family="'Nunito', system-ui, sans-serif"
+    font-size="34"
+    font-weight="900"
+    fill="#3f4eb5"
+    text-anchor="middle"
+    letter-spacing="-1"
+  >Bet</text>
+  <text
+    x="100"
+    y="128"
+    font-family="'Nunito', system-ui, sans-serif"
+    font-size="34"
+    font-weight="900"
+    fill="#3f4eb5"
+    text-anchor="middle"
+    letter-spacing="-1"
+  >ania</text>
+</svg>

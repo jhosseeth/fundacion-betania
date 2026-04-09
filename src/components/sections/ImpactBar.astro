@@ -1,0 +1,245 @@
+---
+import { SITE } from '../../data/site';
+
+type CounterItem =
+  | { kind: 'number'; prefix: string; value: number; label: string }
+  | { kind: 'icon';   icon: string;                  label: string };
+
+const counters: CounterItem[] = [
+  {
+    kind: 'number',
+    prefix: '+',
+    value: SITE.impact.raciones,
+    label: 'Raciones al mes',
+  },
+  {
+    kind: 'number',
+    prefix: '',
+    value: SITE.impact.ninos,
+    label: 'Niños en tutoría',
+  },
+  {
+    kind: 'number',
+    prefix: '+',
+    value: SITE.impact.personas,
+    label: 'Personas los sábados',
+  },
+  {
+    kind: 'icon',
+    icon: '❤️',
+    label: 'Sirviendo desde el amor',
+  },
+];
+---
+
+<section class="impact-bar" id="impact" aria-label="Nuestro impacto">
+  <div class="container">
+    <div class="impact-grid">
+      {counters.map((item) => (
+        <article class="impact-item">
+          {item.kind === 'number' ? (
+            <>
+              <p class="impact-number" aria-live="polite">
+                {item.prefix && <span class="prefix">{item.prefix}</span>}
+                <span
+                  class="count"
+                  data-target={String(item.value)}
+                  data-prefix={item.prefix}
+                >0</span>
+              </p>
+              <p class="impact-label">{item.label}</p>
+            </>
+          ) : (
+            <>
+              <p class="impact-icon" aria-hidden="true">{item.icon}</p>
+              <p class="impact-label">{item.label}</p>
+            </>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <!-- Wave decorativo hacia la siguiente sección -->
+  <div class="wave-bottom" aria-hidden="true">
+    <svg
+      viewBox="0 0 1440 80"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z"
+        fill="var(--color-cream)"
+      />
+    </svg>
+  </div>
+</section>
+
+<script>
+  // CountUp con IntersectionObserver — vanilla JS
+  function easeOutQuart(t: number): number {
+    return 1 - Math.pow(1 - t, 4);
+  }
+
+  function animateCount(el: HTMLElement, target: number, prefix: string, duration = 2000) {
+    const startTime = performance.now();
+
+    function step(now: number) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOutQuart(progress);
+      const current = Math.round(eased * target);
+
+      el.textContent = current.toLocaleString('es-CO');
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target.toLocaleString('es-CO');
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  function initCounters() {
+    const countEls = document.querySelectorAll<HTMLElement>('.count[data-target]');
+    if (!countEls.length) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            const target = parseInt(el.dataset.target ?? '0', 10);
+            const prefix = el.dataset.prefix ?? '';
+
+            if (prefersReduced) {
+              el.textContent = target.toLocaleString('es-CO');
+            } else {
+              animateCount(el, target, prefix);
+            }
+
+            observer.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    countEls.forEach((el) => observer.observe(el));
+  }
+
+  // Esperar a que el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCounters);
+  } else {
+    initCounters();
+  }
+</script>
+
+<style>
+  /* ---- Sección base ---- */
+  /* padding-block shorthand overrides the global section rule (Astro scoped styles win via specificity) */
+  .impact-bar {
+    background: var(--color-primary);
+    padding-top: var(--space-16);
+    padding-bottom: 0; /* wave SVG provides visual bottom spacing */
+    position: relative;
+  }
+
+  @media (min-width: 1024px) {
+    .impact-bar {
+      padding-top: var(--space-20);
+    }
+  }
+
+  /* ---- Grid de contadores ---- */
+  .impact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-10) var(--space-6);
+    margin-bottom: var(--space-16);
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .impact-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-8);
+      margin-bottom: var(--space-20);
+    }
+  }
+
+  /* ---- Cada ítem ---- */
+  .impact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  /* ---- Número ---- */
+  .impact-number {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: var(--font-extrabold);
+    color: var(--color-accent);
+    line-height: 1;
+    max-width: unset;
+    display: flex;
+    align-items: baseline;
+    gap: 0.05em;
+  }
+
+  .prefix {
+    font-size: 0.7em;
+  }
+
+  .count {
+    display: inline-block;
+  }
+
+  /* ---- Ícono (el ítem sin número) ---- */
+  .impact-icon {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1;
+    max-width: unset;
+  }
+
+  /* ---- Label ---- */
+  .impact-label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: rgba(255, 255, 255, 0.78);
+    text-align: center;
+    max-width: 18ch;
+    line-height: 1.4;
+  }
+
+  @media (min-width: 768px) {
+    .impact-label {
+      font-size: var(--text-base);
+    }
+  }
+
+  /* ---- Wave bottom ---- */
+  .wave-bottom {
+    display: block;
+    line-height: 0;
+    height: 60px;
+  }
+
+  .wave-bottom svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .wave-bottom {
+      height: 80px;
+    }
+  }
+</style>

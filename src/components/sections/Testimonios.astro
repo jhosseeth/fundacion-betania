@@ -1,0 +1,79 @@
+---
+// Testimonios.astro — Sección 09: Voces de la comunidad — carrusel de testimonios
+import SectionTitle from '../ui/SectionTitle.astro';
+import Button from '../ui/Button.astro';
+import TestimoniosCarousel from '../interactive/TestimoniosCarousel.svelte';
+import { TESTIMONIOS } from '../../data/testimonios.ts';
+---
+
+<section class="testimonios" id="testimonios" aria-label="Testimonios de la comunidad">
+  <div class="container">
+    <!-- Encabezado -->
+    <SectionTitle
+      eyebrow="Voces de la comunidad"
+      title="Lo que dicen quienes han vivido Betania"
+      light={true}
+    />
+
+    <!-- Carrusel -->
+    <div class="testimonios__carousel-wrap">
+      <TestimoniosCarousel client:load testimonios={TESTIMONIOS} autoDelay={6000} />
+    </div>
+
+    <!-- CTA -->
+    <div class="testimonios__cta">
+      <p class="testimonios__cta-texto">¿Tu historia también puede ser una de ellas?</p>
+      <Button href="#contacto" variant="primary" size="lg">
+        Contáctanos
+      </Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ---- Sección base ---- */
+  .testimonios {
+    background-color: var(--color-primary);
+    padding-block: var(--space-16);
+    overflow: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .testimonios {
+      padding-block: var(--space-20);
+    }
+  }
+
+  /* ---- Wrap del carrusel ---- */
+  .testimonios__carousel-wrap {
+    max-width: 700px;
+    margin-inline: auto;
+    margin-top: var(--space-10);
+    /* Padding lateral para dar espacio a botones prev/next en desktop */
+    padding-inline: 0;
+  }
+
+  @media (min-width: 900px) {
+    .testimonios__carousel-wrap {
+      padding-inline: var(--space-8);
+    }
+  }
+
+  /* ---- CTA ---- */
+  .testimonios__cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+    margin-top: var(--space-12);
+    text-align: center;
+  }
+
+  .testimonios__cta-texto {
+    font-family: var(--font-display);
+    font-size: clamp(var(--text-base), 2.5vw, var(--text-xl));
+    font-weight: var(--font-bold);
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 36ch;
+  }
+</style>

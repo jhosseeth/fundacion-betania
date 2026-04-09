@@ -8,6 +8,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
     "@astrojs/svelte": "^8.0.4",
     "astro": "^6.1.5",
     "svelte": "^5.55.2"

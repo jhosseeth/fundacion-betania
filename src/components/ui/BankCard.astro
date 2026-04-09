@@ -1,0 +1,151 @@
+---
+// BankCard.astro — Datos bancarios para donaciones
+// Importa datos de site.ts; el botón de copiar es CopyButton.svelte
+
+import { SITE } from '../../data/site.ts';
+import CopyButton from '../interactive/CopyButton.svelte';
+
+const { bank } = SITE;
+---
+
+<div class="bank-card">
+  <!-- Encabezado banco -->
+  <div class="bank-card__header">
+    <div class="bank-card__bank-logo" aria-hidden="true">🏦</div>
+    <div>
+      <p class="bank-card__bank-name">{bank.name}</p>
+      <p class="bank-card__bank-label">Cuenta para donaciones</p>
+    </div>
+  </div>
+
+  <!-- Filas de datos -->
+  <dl class="bank-card__fields">
+    <div class="bank-card__row">
+      <dt class="bank-card__label">Titular</dt>
+      <dd class="bank-card__value">{bank.holder}</dd>
+    </div>
+
+    <div class="bank-card__row">
+      <dt class="bank-card__label">Número de cuenta</dt>
+      <dd class="bank-card__value bank-card__account">{bank.account}</dd>
+    </div>
+
+    <div class="bank-card__row">
+      <dt class="bank-card__label">Tipo</dt>
+      <dd class="bank-card__value">{bank.type}</dd>
+    </div>
+
+    <div class="bank-card__row">
+      <dt class="bank-card__label">NIT</dt>
+      <dd class="bank-card__value">{bank.nit}</dd>
+    </div>
+  </dl>
+
+  <!-- Botón copiar (componente Svelte interactivo) -->
+  <div class="bank-card__action">
+    <CopyButton client:load accountNumber={bank.account} />
+  </div>
+</div>
+
+<style>
+  .bank-card {
+    background-color: var(--color-white);
+    border: 2px solid rgba(63, 78, 181, 0.15);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    width: 100%;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 768px) {
+    .bank-card {
+      max-width: 400px;
+      padding: var(--space-8);
+    }
+  }
+
+  /* ---- Encabezado ---- */
+  .bank-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding-bottom: var(--space-5);
+    border-bottom: 1px solid var(--color-cream-dark);
+  }
+
+  .bank-card__bank-logo {
+    font-size: 2.25rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .bank-card__bank-name {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: var(--font-extrabold);
+    color: var(--color-primary);
+    max-width: none;
+  }
+
+  .bank-card__bank-label {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    max-width: none;
+    margin-top: var(--space-1);
+  }
+
+  /* ---- Filas ---- */
+  .bank-card__fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .bank-card__row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  @media (min-width: 480px) {
+    .bank-card__row {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-4);
+    }
+  }
+
+  .bank-card__label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .bank-card__value {
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--color-text);
+  }
+
+  .bank-card__account {
+    font-size: var(--text-base);
+    font-weight: var(--font-extrabold);
+    color: var(--color-primary);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---- Acción ---- */
+  .bank-card__action {
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--color-cream-dark);
+  }
+</style>

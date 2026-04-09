@@ -1,0 +1,164 @@
+---
+// Button.astro — Botón reutilizable con variantes y tamaños
+// Si tiene href → renderiza <a>; si no → <button>
+
+interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  disabled = false,
+  type = 'button',
+  class: className,
+  ...rest
+} = Astro.props;
+
+const classes = ['btn', `btn--${variant}`, `btn--${size}`, className]
+  .filter(Boolean)
+  .join(' ');
+---
+
+{href ? (
+  <a
+    href={disabled ? undefined : href}
+    class={classes}
+    aria-disabled={disabled ? 'true' : undefined}
+    {...rest}
+  >
+    <slot />
+  </a>
+) : (
+  <button
+    type={type}
+    class={classes}
+    disabled={disabled}
+    {...rest}
+  >
+    <slot />
+  </button>
+)}
+
+<style>
+  /* ---- Base ---- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font-family: var(--font-display);
+    font-weight: var(--font-bold);
+    line-height: 1;
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition:
+      background-color var(--transition-base),
+      color var(--transition-base),
+      border-color var(--transition-base),
+      box-shadow var(--transition-base),
+      transform var(--transition-fast);
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .btn:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  .btn:disabled,
+  .btn[aria-disabled='true'] {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* ---- Tamaños ---- */
+  /* Touch target mínimo 44px */
+  .btn--sm {
+    font-size: var(--text-sm);
+    padding: var(--space-2) var(--space-4);
+    min-height: 44px;
+  }
+
+  .btn--md {
+    font-size: var(--text-base);
+    padding: var(--space-3) var(--space-6);
+    min-height: 48px;
+  }
+
+  .btn--lg {
+    font-size: var(--text-lg);
+    padding: var(--space-4) var(--space-8);
+    min-height: 56px;
+  }
+
+  @media (min-width: 480px) {
+    .btn--sm  { min-height: 40px; }
+    .btn--md  { min-height: 44px; }
+    .btn--lg  { min-height: 52px; }
+  }
+
+  /* ---- Variante: primary (amarillo dorado) ---- */
+  .btn--primary {
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    border-color: var(--color-accent);
+  }
+
+  .btn--primary:hover:not(:disabled) {
+    background-color: #f5c740;
+    border-color: #f5c740;
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+
+  /* ---- Variante: secondary (azul outline) ---- */
+  .btn--secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .btn--secondary:hover:not(:disabled) {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+
+  /* ---- Variante: ghost (transparente) ---- */
+  .btn--ghost {
+    background-color: transparent;
+    color: var(--color-text);
+    border-color: transparent;
+  }
+
+  .btn--ghost:hover:not(:disabled) {
+    background-color: rgba(63, 78, 181, 0.08);
+    color: var(--color-primary);
+  }
+
+  /* ---- Variante: danger (coral) ---- */
+  .btn--danger {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    border-color: var(--color-secondary);
+  }
+
+  .btn--danger:hover:not(:disabled) {
+    background-color: #e0432a;
+    border-color: #e0432a;
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+</style>

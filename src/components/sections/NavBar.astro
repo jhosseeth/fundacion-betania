@@ -1,0 +1,223 @@
+---
+import { SITE } from '../../data/site';
+import MobileMenu from '../interactive/MobileMenu.svelte';
+
+const navLinks = [
+  { label: 'Inicio',        href: '#inicio' },
+  { label: 'Quiénes Somos', href: '#quienes-somos' },
+  { label: 'Programas',     href: '#programas' },
+  { label: 'Cómo Ayudar',   href: '#como-ayudar' },
+  { label: 'Donaciones',    href: '#donaciones' },
+  { label: 'Contacto',      href: '#contacto' },
+];
+---
+
+<header class="nav-header" id="nav-header" role="banner">
+  <!-- Barra de progreso de scroll -->
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <div class="nav-inner container">
+    <!-- Logo -->
+    <a href="#inicio" class="nav-logo" aria-label="Fundación Betania — Inicio">
+      <img
+        src="/logo.svg"
+        alt="Fundación Betania"
+        width="140"
+        height="44"
+        loading="eager"
+      />
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="desktop-nav" aria-label="Navegación principal">
+      <ul class="nav-links">
+        {navLinks.map((link) => (
+          <li>
+            <a href={link.href} class="nav-link">{link.label}</a>
+          </li>
+        ))}
+      </ul>
+      <a href="#donaciones" class="btn-donar">Donar</a>
+    </nav>
+
+    <!-- Mobile menu (Svelte, client-side) -->
+    <div class="mobile-menu-wrapper">
+      <MobileMenu
+        client:load
+        links={navLinks}
+        whatsappLink={SITE.whatsapp.link}
+      />
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('nav-header');
+  const progress = document.getElementById('scroll-progress');
+
+  function updateNav() {
+    const scrollY = window.scrollY;
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+
+    // Transparente → sólido al bajar
+    if (scrollY > 80) {
+      header?.classList.add('is-scrolled');
+    } else {
+      header?.classList.remove('is-scrolled');
+    }
+
+    // Barra de progreso
+    if (progress && docH > 0) {
+      const pct = (scrollY / docH) * 100;
+      progress.style.width = `${pct}%`;
+    }
+  }
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav(); // Estado inicial
+</script>
+
+<style>
+  /* ---- Header base ---- */
+  .nav-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: var(--nav-height);
+    color: white;
+    transition: background var(--transition-slow), box-shadow var(--transition-slow), color var(--transition-slow);
+  }
+
+  /* Estado transparente (sobre el hero) */
+  .nav-header:not(.is-scrolled) {
+    background: transparent;
+  }
+
+  /* Estado sólido (al hacer scroll) */
+  .nav-header.is-scrolled {
+    background: var(--color-cream);
+    box-shadow: var(--shadow-md);
+    color: var(--color-text);
+  }
+
+  /* ---- Barra de progreso ---- */
+  .scroll-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: var(--color-accent);
+    border-radius: 0 2px 2px 0;
+    transition: width 80ms linear;
+  }
+
+  /* ---- Inner layout ---- */
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  /* ---- Logo ---- */
+  .nav-logo img {
+    height: 40px;
+    width: auto;
+    transition: opacity var(--transition-fast);
+  }
+
+  .nav-logo:hover img {
+    opacity: 0.85;
+  }
+
+  /* ---- Desktop nav (≥768px) ---- */
+  .desktop-nav {
+    display: none;
+    align-items: center;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .desktop-nav {
+      display: flex;
+    }
+
+    .mobile-menu-wrapper {
+      display: none;
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    border-radius: var(--radius-sm);
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition-fast), background var(--transition-fast);
+    min-height: 44px;
+    white-space: nowrap;
+  }
+
+  /* Transparente: texto blanco */
+  .nav-header:not(.is-scrolled) .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .nav-header:not(.is-scrolled) .nav-link:hover {
+    color: var(--color-accent);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Sólido: texto oscuro */
+  .nav-header.is-scrolled .nav-link {
+    color: var(--color-text);
+  }
+  .nav-header.is-scrolled .nav-link:hover {
+    color: var(--color-primary);
+    background: rgba(63, 78, 181, 0.08);
+  }
+
+  /* ---- Botón Donar ---- */
+  .btn-donar {
+    padding: var(--space-2) var(--space-5);
+    background: var(--color-accent);
+    color: var(--color-text);
+    font-weight: var(--font-bold);
+    font-size: var(--text-sm);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .btn-donar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 211, 112, 0.4);
+    color: var(--color-text);
+  }
+
+  /* ---- Mobile wrapper (visible < 768px) ---- */
+  .mobile-menu-wrapper {
+    display: flex;
+    align-items: center;
+    /* Color del hamburger: blanco cuando transparente, text cuando sólido */
+    color: white;
+  }
+
+  .nav-header.is-scrolled .mobile-menu-wrapper {
+    color: var(--color-text);
+  }
+</style>

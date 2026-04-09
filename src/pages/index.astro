@@ -1,29 +1,60 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import NavBar from '../components/sections/NavBar.astro';
+import Hero from '../components/sections/Hero.astro';
+import ImpactBar from '../components/sections/ImpactBar.astro';
+import QuienesSomos from '../components/sections/QuienesSomos.astro';
+import Programas from '../components/sections/Programas.astro';
+import Historias from '../components/sections/Historias.astro';
+import ComoAyudar from '../components/sections/ComoAyudar.astro';
+import Donaciones from '../components/sections/Donaciones.astro';
+import Testimonios from '../components/sections/Testimonios.astro';
+import Galeria from '../components/sections/Galeria.astro';
+import Contacto from '../components/sections/Contacto.astro';
+import Footer from '../components/sections/Footer.astro';
+import FloatingElements from '../components/ui/FloatingElements.astro';
 ---
 
 <BaseLayout>
-  <main>
-    <h1>Fundación Betania</h1>
-    <p>Sitio en construcción — stack listo ✓</p>
+  <!-- Navegación fija -->
+  <NavBar />
+
+  <!-- Contenido principal -->
+  <main id="main-content">
+    <!-- (01) Hero -->
+    <Hero />
+
+    <!-- (02) Impact Bar -->
+    <ImpactBar />
+
+    <!-- (04) Quiénes somos -->
+    <QuienesSomos />
+
+    <!-- (05) Programas -->
+    <Programas />
+
+    <!-- (06) Historias — pico emocional -->
+    <Historias />
+
+    <!-- (07) Cómo ayudar — escalera de compromiso -->
+    <ComoAyudar />
+
+    <!-- (08) Donaciones — conversión -->
+    <Donaciones />
+
+    <!-- (09) Testimonios — voces de la comunidad -->
+    <Testimonios />
+
+    <!-- (10) Galería fotográfica -->
+    <Galeria />
+
+    <!-- (11) Contacto -->
+    <Contacto />
   </main>
+
+  <!-- Elementos flotantes globales -->
+  <FloatingElements />
+
+  <!-- (12) Footer -->
+  <Footer />
 </BaseLayout>
-
-<style>
-  main {
-    display: grid;
-    place-content: center;
-    min-height: 100svh;
-    text-align: center;
-    gap: var(--space-4);
-  }
-
-  h1 {
-    color: var(--color-primary);
-  }
-
-  p {
-    color: var(--color-text-muted);
-    max-width: unset;
-  }
-</style>

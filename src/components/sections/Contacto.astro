@@ -1,0 +1,274 @@
+---
+// Contacto.astro — (11) Contacto: WhatsApp + Mapa + Donaciones
+// Layout: apilado mobile → 3 columnas desktop
+
+import SectionTitle from '../ui/SectionTitle.astro';
+import BankCard from '../ui/BankCard.astro';
+import { SITE } from '../../data/site';
+---
+
+<section class="contacto" id="contacto" aria-label="Contacto y ubicación">
+  <div class="container">
+    <!-- Encabezado -->
+    <SectionTitle
+      eyebrow="Hablemos"
+      title="Estamos para ti"
+      subtitle="¿Tienes preguntas, quieres donar o simplemente conocernos? Escríbenos."
+    />
+
+    <!-- Grid de 3 columnas -->
+    <div class="contacto__grid">
+
+      <!-- ---- Columna 1: WhatsApp ---- -->
+      <div class="contact-card contact-card--whatsapp">
+        <!-- Ícono WhatsApp -->
+        <div class="contact-card__icon" aria-hidden="true">
+          <svg
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.99L0 24l6.22-1.58A11.96 11.96 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52z"
+              fill="#25D366"
+            />
+            <path
+              d="M17.47 14.63c-.28-.14-1.64-.81-1.9-.9-.25-.09-.44-.14-.62.14-.18.28-.71.9-.87 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.44-2.24-1.39-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.13-.12.28-.32.42-.48.14-.16.19-.28.28-.46.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.05-.22-.54-.45-.46-.62-.47H8.27c-.18 0-.46.07-.7.34-.24.27-.92.9-.92 2.19s.94 2.54 1.07 2.72c.14.18 1.85 2.82 4.48 3.95.63.27 1.12.43 1.5.55.63.2 1.2.17 1.65.1.5-.07 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.18-.53-.32z"
+              fill="#fff"
+            />
+          </svg>
+        </div>
+
+        <h3 class="contact-card__title">WhatsApp</h3>
+        <p class="contact-card__body">
+          La forma más rápida de contactarnos. Respuesta en menos de 24h.
+        </p>
+        <p class="contact-card__phone">{SITE.phone}</p>
+
+        <a
+          href={SITE.whatsapp.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-card__btn"
+          aria-label="Abrir WhatsApp y escribir a Fundación Betania"
+        >
+          <!-- Ícono inline pequeño -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.99L0 24l6.22-1.58A11.96 11.96 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52z"/>
+          </svg>
+          Escribir por WhatsApp
+        </a>
+      </div>
+
+      <!-- ---- Columna 2: Mapa ---- -->
+      <div class="contact-card contact-card--map">
+        <h3 class="contact-card__title">Encuéntranos</h3>
+        <p class="contact-card__body">
+          <strong>{SITE.address.city}, Colombia</strong><br />
+          {SITE.address.hours}
+        </p>
+
+        <!-- Google Maps embed -->
+        <div class="contact-card__map-wrapper">
+          <iframe
+            src={SITE.address.mapsEmbed}
+            width="100%"
+            height="280"
+            style="border:0; border-radius: 16px; display: block;"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Mapa de Medellín, Colombia — Fundación Betania"
+          ></iframe>
+        </div>
+
+        <a
+          href={SITE.address.mapsLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-card__map-link"
+          aria-label="Abrir Google Maps para ver la ubicación"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          Ver en Google Maps
+        </a>
+      </div>
+
+      <!-- ---- Columna 3: Datos bancarios ---- -->
+      <div class="contact-card contact-card--bank">
+        <h3 class="contact-card__title">Donaciones</h3>
+        <p class="contact-card__body">
+          Tu aporte transforma vidas. Realiza tu donación directamente a nuestra cuenta.
+        </p>
+        <BankCard />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ---- Sección ---- */
+  .contacto {
+    background-color: var(--color-cream-dark);
+    padding-block: var(--space-16) var(--space-20);
+  }
+
+  @media (min-width: 1024px) {
+    .contacto {
+      padding-block: var(--space-20) var(--space-24);
+    }
+  }
+
+  /* ---- Grid ---- */
+  .contacto__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-top: var(--space-10);
+  }
+
+  @media (min-width: 768px) {
+    .contacto__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+      margin-top: var(--space-12);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .contacto__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  /* ---- Card base ---- */
+  .contact-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    box-shadow: var(--shadow-md);
+  }
+
+  @media (min-width: 768px) {
+    .contact-card {
+      padding: var(--space-10);
+    }
+  }
+
+  /* ---- Ícono WhatsApp ---- */
+  .contact-card__icon {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-lg);
+    background-color: rgba(37, 211, 102, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ---- Título de card ---- */
+  .contact-card__title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--font-extrabold);
+    color: var(--color-text);
+    line-height: 1.2;
+  }
+
+  /* ---- Cuerpo de texto ---- */
+  .contact-card__body {
+    font-size: var(--text-base);
+    line-height: 1.65;
+    color: var(--color-text-muted);
+  }
+
+  /* ---- Número de teléfono ---- */
+  .contact-card__phone {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-extrabold);
+    color: var(--color-text);
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- Botón WhatsApp ---- */
+  .contact-card__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-6);
+    min-height: 52px;
+    background-color: #25D366;
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: var(--font-bold);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: background-color var(--transition-base), transform var(--transition-fast);
+    margin-top: auto;
+  }
+
+  .contact-card__btn:hover {
+    background-color: #20bd5c;
+    transform: translateY(-2px);
+    color: #fff;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .contact-card__btn {
+      transition: background-color var(--transition-base), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .contact-card__btn:hover {
+      box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
+    }
+  }
+
+  /* ---- Mapa ---- */
+  .contact-card__map-wrapper {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .contact-card__map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--color-primary);
+    text-decoration: none;
+    min-height: 44px;
+    padding-block: var(--space-2);
+    transition: color var(--transition-fast);
+  }
+
+  .contact-card__map-link:hover {
+    color: var(--color-secondary);
+  }
+
+  /* ---- Card banco: ajustar BankCard que puede tener max-width ---- */
+  .contact-card--bank :global(.bank-card) {
+    max-width: 100%;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+  }
+</style>

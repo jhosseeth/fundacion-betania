@@ -1,0 +1,74 @@
+---
+// Galeria.astro — (10) Galería de fotos con lightbox
+// Grid 2col mobile → 3col tablet → 4col desktop
+
+import SectionTitle from '../ui/SectionTitle.astro';
+import ImageGallery from '../interactive/ImageGallery.svelte';
+
+import foto01 from '../../assets/photos/nina-almuerzo-sonrisa.jpg';
+import foto02 from '../../assets/photos/ninos-abrazo.jpg';
+import foto03 from '../../assets/photos/nina-mesa-feliz.jpg';
+import foto04 from '../../assets/photos/equipo-mision.jpg';
+import foto05 from '../../assets/photos/ninos-clase.jpg';
+import foto06 from '../../assets/photos/nino-manualidades.jpg';
+import foto07 from '../../assets/photos/mujeres-oracion.jpg';
+import foto08 from '../../assets/photos/ninos-oracion.jpg';
+import foto09 from '../../assets/photos/adultos-almuerzo.jpg';
+import foto10 from '../../assets/photos/adulto-mayor-almuerzo.jpg';
+import foto11 from '../../assets/photos/voluntaria-ninos-inicio.jpg';
+import foto12 from '../../assets/photos/ninos-letrero-amor.jpg';
+
+const images = [
+  { src: foto01.src, alt: 'Niña sonriendo con su almuerzo en Fundación Betania' },
+  { src: foto02.src, alt: 'Niños compartiendo un abrazo en la fundación' },
+  { src: foto03.src, alt: 'Niña feliz durante el tiempo de mesa' },
+  { src: foto04.src, alt: 'Equipo de voluntarios de Fundación Betania' },
+  { src: foto05.src, alt: 'Niños en clase de tutoría escolar' },
+  { src: foto06.src, alt: 'Niño realizando manualidades creativas' },
+  { src: foto07.src, alt: 'Mujeres de la comunidad en oración' },
+  { src: foto08.src, alt: 'Niños orando juntos en la fundación' },
+  { src: foto09.src, alt: 'Adultos compartiendo el almuerzo comunitario' },
+  { src: foto10.src, alt: 'Adulto mayor disfrutando del comedor comunitario' },
+  { src: foto11.src, alt: 'Voluntaria recibiendo a los niños en la sede' },
+  { src: foto12.src, alt: 'Niños sosteniendo el letrero: Este lugar existe para amar' },
+];
+---
+
+<section class="galeria" id="galeria" aria-label="Galería fotográfica">
+  <div class="container">
+    <!-- Encabezado -->
+    <SectionTitle
+      eyebrow="Nuestra comunidad"
+      title="Momentos que nos mueven"
+      subtitle="Cada foto es una historia de fe, servicio y transformación."
+    />
+
+    <!-- Galería interactiva -->
+    <div class="galeria__grid-wrapper">
+      <ImageGallery client:load {images} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .galeria {
+    background-color: var(--color-cream);
+    padding-block: var(--space-16) var(--space-20);
+  }
+
+  @media (min-width: 1024px) {
+    .galeria {
+      padding-block: var(--space-20) var(--space-24);
+    }
+  }
+
+  .galeria__grid-wrapper {
+    margin-top: var(--space-10);
+  }
+
+  @media (min-width: 768px) {
+    .galeria__grid-wrapper {
+      margin-top: var(--space-12);
+    }
+  }
+</style>

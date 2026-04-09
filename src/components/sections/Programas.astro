@@ -1,0 +1,199 @@
+---
+// Programas.astro — Sección 05: Programas de restauración
+// Grid de ProgramCards + CTA final
+
+import SectionTitle from '../ui/SectionTitle.astro';
+import ProgramCard from '../ui/ProgramCard.astro';
+import { PROGRAMAS } from '../../data/programas';
+---
+
+<section class="programas" id="programas" aria-labelledby="prog-heading">
+
+  <!-- ══════════ A) Encabezado ══════════ -->
+  <div class="programas__header container">
+    <SectionTitle
+      eyebrow="Lo que hacemos"
+      title="Programas de restauración"
+      subtitle="Tres líneas de acción que transforman vidas, familias y barrios."
+    />
+  </div>
+
+  <!-- ══════════ B) Grid de tarjetas ══════════ -->
+  <div class="programas__grid-wrapper container">
+    <ul class="programas__grid" role="list">
+      {PROGRAMAS.map((programa) => (
+        <li>
+          <ProgramCard
+            titulo={programa.titulo}
+            descripcion={programa.descripcion}
+            icon={programa.icon}
+            foto={programa.foto}
+            tag={programa.tag}
+            proximamente={programa.proximamente}
+          />
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- ══════════ C) CTA final ══════════ -->
+  <div class="programas__cta container">
+    <p class="programas__cta-text">¿Quieres ser parte de la transformación?</p>
+    <a href="#como-ayudar" class="programas__cta-btn">
+      Cómo ayudar
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+
+</section>
+
+<style>
+  /* ══════════════════════════════════════════
+     SECCIÓN BASE
+  ══════════════════════════════════════════ */
+  .programas {
+    background-color: var(--color-cream-dark);
+    padding-block: var(--space-16);
+    overflow: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .programas {
+      padding-block: var(--space-24);
+    }
+  }
+
+  /* ══════════════════════════════════════════
+     A) ENCABEZADO
+  ══════════════════════════════════════════ */
+  .programas__header {
+    margin-bottom: var(--space-10);
+  }
+
+  @media (min-width: 1024px) {
+    .programas__header {
+      margin-bottom: var(--space-12);
+    }
+  }
+
+  /* ══════════════════════════════════════════
+     B) GRID DE TARJETAS
+     1 col (mobile) → 2 col (640px) → 3 col (1024px)
+  ══════════════════════════════════════════ */
+  .programas__grid-wrapper {
+    margin-bottom: var(--space-12);
+  }
+
+  @media (min-width: 1024px) {
+    .programas__grid-wrapper {
+      margin-bottom: var(--space-16);
+    }
+  }
+
+  .programas__grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .programas__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .programas__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  /* Las cards llenan completamente sus celdas */
+  .programas__grid > li {
+    display: flex;
+  }
+
+  .programas__grid > li > :global(.program-card) {
+    flex: 1;
+  }
+
+  /* ══════════════════════════════════════════
+     C) CTA FINAL
+  ══════════════════════════════════════════ */
+  .programas__cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-5);
+    text-align: center;
+  }
+
+  @media (min-width: 480px) {
+    .programas__cta {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  .programas__cta-text {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-weight: var(--font-semibold);
+    color: var(--color-text);
+    line-height: 1.4;
+    max-width: 40ch;
+  }
+
+  .programas__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-8);
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: var(--font-bold);
+    color: var(--color-white);
+    background-color: var(--color-secondary);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    min-height: 52px;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(247, 90, 59, 0.3);
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast);
+    flex-shrink: 0;
+  }
+
+  .programas__cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(247, 90, 59, 0.45);
+    color: var(--color-white);
+  }
+
+  /* Icono de flecha: sigue al hover */
+  .programas__cta-btn svg {
+    transition: transform var(--transition-fast);
+  }
+
+  .programas__cta-btn:hover svg {
+    transform: translateX(4px);
+  }
+</style>

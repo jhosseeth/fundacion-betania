@@ -1,0 +1,410 @@
+---
+// QuienesSomos.astro — Sección 04: Quiénes somos
+// Identidad, misión, visión, valores y declaración de Fundación Betania
+
+import { Image } from 'astro:assets';
+import SectionTitle from '../ui/SectionTitle.astro';
+import ValueCard from '../ui/ValueCard.astro';
+import ninosAbrazo from '../../assets/photos/ninos-abrazo.jpg';
+
+const VALORES = [
+  { icon: '✝️',  titulo: 'Cristo como centro',       descripcion: 'Todo lo que hacemos nace de Él y vuelve a Él. Jesucristo es nuestra razón de ser.' },
+  { icon: '🤝',  titulo: 'Amor práctico',             descripcion: 'El amor no solo se proclama, se demuestra con acciones concretas que dignifican.' },
+  { icon: '🌟',  titulo: 'Dignidad humana',           descripcion: 'Cada persona lleva la imagen de Dios. La tratamos con honra y respeto profundo.' },
+  { icon: '🏠',  titulo: 'Restauración familiar',     descripcion: 'La familia es el núcleo de la comunidad. Su sanidad transforma el barrio entero.' },
+  { icon: '💎',  titulo: 'Excelencia',                descripcion: 'Hacemos las cosas bien porque servimos a un Dios grande. La forma también importa.' },
+  { icon: '🙌',  titulo: 'Servicio',                  descripcion: 'El servicio genuino transforma tanto a quien da como a quien recibe.' },
+  { icon: '🕊️', titulo: 'Fe activa',                  descripcion: 'Creemos con convicción y actuamos con valentía. La fe sin obras no es fe.' },
+  { icon: '🌱',  titulo: 'Compromiso comunitario',    descripcion: 'Echamos raíces en el barrio. Somos de aquí y para aquí, para el largo plazo.' },
+];
+---
+
+<section class="quienes-somos" id="quienes-somos" aria-labelledby="qs-heading">
+
+  <!-- ══════════ A) Encabezado ══════════ -->
+  <div class="qs-header container">
+    <SectionTitle
+      eyebrow="Nuestra Historia"
+      title="Una casa en medio de la vulnerabilidad"
+      subtitle="Fundación Betania nace como una casa en medio de la vulnerabilidad, inspirada en el lugar donde Jesús fue amado, donde el perfume llenó la casa y donde la muerte fue vencida por la vida. Creemos que nuestro barrio puede experimentar esa misma transformación."
+    />
+  </div>
+
+  <!-- ══════════ B) Pull-quote Misión ══════════ -->
+  <div class="qs-mission-wrapper container">
+    <blockquote class="qs-mission">
+      <span class="qs-mission__quote-mark" aria-hidden="true">"</span>
+      <p class="qs-mission__text">
+        Ser una casa de restauración integral para las familias de nuestra comunidad, anunciando
+        a Jesucristo como esperanza viva y formando personas capaces de transformar su realidad
+        espiritual, emocional, educativa y social.
+      </p>
+      <footer class="qs-mission__label">Misión de Fundación Betania</footer>
+    </blockquote>
+  </div>
+
+  <!-- ══════════ C) Grid Visión + Imagen ══════════ -->
+  <div class="qs-vision-grid container">
+    <!-- Columna texto -->
+    <div class="qs-vision-text">
+      <div class="qs-text-block">
+        <h3 class="qs-text-block__title">Nuestra Visión</h3>
+        <p class="qs-text-block__body">
+          Soñamos con un barrio transformado por el poder de Jesús, donde cada familia sea
+          fortalecida, cada niño formado con propósito, cada joven levantado con identidad y
+          cada hogar convertido en una Betania: una casa donde la presencia de Dios trae vida nueva.
+        </p>
+      </div>
+
+      <div class="qs-text-block">
+        <h3 class="qs-text-block__title">Evangelio Integral</h3>
+        <p class="qs-text-block__body">
+          En Betania creemos que el Evangelio transforma el corazón, restaura la familia,
+          dignifica a la persona, forma carácter, capacita para el trabajo y la vida, e impacta
+          la cultura del barrio. No solo predicamos esperanza, la acompañamos con formación
+          y acción.
+        </p>
+      </div>
+    </div>
+
+    <!-- Columna imagen -->
+    <div class="qs-vision-image">
+      <Image
+        src={ninosAbrazo}
+        alt="Cuatro niños abrazados y sonriendo en Fundación Betania"
+        class="qs-vision-image__img"
+        widths={[480, 768, 960]}
+        sizes="(min-width: 1024px) 45vw, (min-width: 768px) 50vw, 100vw"
+        quality={85}
+        loading="lazy"
+      />
+    </div>
+  </div>
+
+  <!-- ══════════ D) Valores ══════════ -->
+  <div class="qs-valores-wrapper">
+    <div class="qs-valores container">
+      <SectionTitle
+        eyebrow="Fundamentos"
+        title="Lo que nos mueve"
+      />
+      <ul class="qs-valores-grid" role="list">
+        {VALORES.map((v) => (
+          <li>
+            <ValueCard icon={v.icon} titulo={v.titulo} descripcion={v.descripcion} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══════════ E) Declaración final ══════════ -->
+  <div class="qs-declaracion-wrapper container">
+    <div class="qs-declaracion">
+      <p class="qs-declaracion__text">
+        Creemos que lo que hoy parece vulnerable será testimonio de resurrección. Betania será
+        una casa donde el perfume de la entrega llene el barrio y donde muchas familias vuelvan
+        a vivir.
+      </p>
+    </div>
+  </div>
+
+</section>
+
+<style>
+  /* ══════════════════════════════════════════
+     SECCIÓN BASE
+  ══════════════════════════════════════════ */
+  .quienes-somos {
+    background-color: var(--color-cream);
+    padding-block: var(--space-16);
+    overflow: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .quienes-somos {
+      padding-block: var(--space-24);
+    }
+  }
+
+  /* ══════════════════════════════════════════
+     A) ENCABEZADO
+  ══════════════════════════════════════════ */
+  .qs-header {
+    margin-bottom: var(--space-12);
+  }
+
+  @media (min-width: 1024px) {
+    .qs-header {
+      margin-bottom: var(--space-16);
+    }
+  }
+
+  /* ══════════════════════════════════════════
+     B) PULL-QUOTE MISIÓN
+  ══════════════════════════════════════════ */
+  .qs-mission-wrapper {
+    margin-bottom: var(--space-12);
+  }
+
+  @media (min-width: 1024px) {
+    .qs-mission-wrapper {
+      margin-bottom: var(--space-16);
+    }
+  }
+
+  .qs-mission {
+    position: relative;
+    background-color: var(--color-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8) var(--space-6);
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .qs-mission {
+      padding: var(--space-12) var(--space-16);
+    }
+  }
+
+  /* Blob decorativo de fondo */
+  .qs-mission::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -10%;
+    width: 60%;
+    aspect-ratio: 1;
+    background: rgba(255, 211, 112, 0.08);
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+    pointer-events: none;
+  }
+
+  .qs-mission__quote-mark {
+    display: block;
+    font-family: Georgia, serif;
+    font-size: clamp(4rem, 10vw, 7rem);
+    line-height: 0.6;
+    color: var(--color-accent);
+    margin-bottom: var(--space-4);
+    opacity: 0.9;
+    user-select: none;
+  }
+
+  .qs-mission__text {
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+    font-style: italic;
+    font-weight: var(--font-semibold);
+    line-height: 1.65;
+    color: #ffffff;
+    max-width: 70ch;
+    margin-inline: auto;
+    position: relative;
+  }
+
+  .qs-mission__label {
+    margin-top: var(--space-5);
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    opacity: 0.85;
+    position: relative;
+  }
+
+  /* ══════════════════════════════════════════
+     C) GRID VISIÓN + IMAGEN
+  ══════════════════════════════════════════ */
+  .qs-vision-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    margin-bottom: var(--space-12);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .qs-vision-grid {
+      /* Imagen arriba en mobile → natural; en tablet imagen a la derecha */
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      gap: var(--space-12);
+      margin-bottom: var(--space-16);
+    }
+
+    /* En tablet+: texto a la izquierda, imagen a la derecha */
+    .qs-vision-text  { order: 1; }
+    .qs-vision-image { order: 2; }
+  }
+
+  /* En mobile: imagen primero, texto después */
+  .qs-vision-image { order: -1; }
+
+  @media (min-width: 768px) {
+    .qs-vision-image { order: 2; }
+  }
+
+  @media (min-width: 1024px) {
+    .qs-vision-grid {
+      grid-template-columns: 1fr 42%;
+      gap: var(--space-16);
+    }
+  }
+
+  /* Bloques de texto (Visión + Enfoque) */
+  .qs-vision-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .qs-text-block__title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--font-extrabold);
+    color: var(--color-primary);
+    margin-bottom: var(--space-3);
+    line-height: 1.2;
+  }
+
+  @media (min-width: 768px) {
+    .qs-text-block__title {
+      font-size: var(--text-2xl);
+    }
+  }
+
+  .qs-text-block__body {
+    font-size: var(--text-base);
+    line-height: 1.75;
+    color: var(--color-text-muted);
+    max-width: 65ch;
+  }
+
+  @media (min-width: 768px) {
+    .qs-text-block__body {
+      font-size: var(--text-lg);
+    }
+  }
+
+  /* Imagen */
+  .qs-vision-image {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .qs-vision-image__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--transition-slow);
+  }
+
+  .qs-vision-image:hover .qs-vision-image__img {
+    transform: scale(1.03);
+  }
+
+  /* ══════════════════════════════════════════
+     D) VALORES
+  ══════════════════════════════════════════ */
+  .qs-valores-wrapper {
+    background-color: var(--color-cream-dark);
+    padding-block: var(--space-16);
+    /* Wave top suave */
+    clip-path: polygon(0 3%, 100% 0, 100% 97%, 0 100%);
+    margin-block: var(--space-4);
+  }
+
+  @media (min-width: 1024px) {
+    .qs-valores-wrapper {
+      padding-block: var(--space-20);
+      clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+    }
+  }
+
+  .qs-valores {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+
+  @media (min-width: 1024px) {
+    .qs-valores {
+      gap: var(--space-12);
+    }
+  }
+
+  .qs-valores-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .qs-valores-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-6);
+    }
+  }
+
+  /* ══════════════════════════════════════════
+     E) DECLARACIÓN FINAL
+  ══════════════════════════════════════════ */
+  .qs-declaracion-wrapper {
+    margin-top: var(--space-12);
+  }
+
+  @media (min-width: 1024px) {
+    .qs-declaracion-wrapper {
+      margin-top: var(--space-16);
+    }
+  }
+
+  .qs-declaracion {
+    background-color: var(--color-cream-dark);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8) var(--space-6);
+    text-align: center;
+    position: relative;
+  }
+
+  @media (min-width: 768px) {
+    .qs-declaracion {
+      padding: var(--space-12) var(--space-16);
+    }
+  }
+
+  /* Línea decorativa superior */
+  .qs-declaracion::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    border-radius: var(--radius-full);
+  }
+
+  .qs-declaracion__text {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-style: italic;
+    font-weight: var(--font-semibold);
+    line-height: 1.7;
+    color: var(--color-text);
+    max-width: 65ch;
+    margin-inline: auto;
+    padding-top: var(--space-3);
+  }
+</style>

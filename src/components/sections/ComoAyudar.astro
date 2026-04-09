@@ -1,0 +1,249 @@
+---
+// ComoAyudar.astro — Sección 07: Escalera de compromiso — 4 formas de involucrarse
+import SectionTitle from '../ui/SectionTitle.astro';
+import Button from '../ui/Button.astro';
+import { SITE } from '../../data/site.ts';
+
+const cards = [
+  {
+    emoji: '💛',
+    emojiLabel: 'Corazón dorado',
+    titulo: 'Donar',
+    descripcion:
+      'Tu aporte mensual o único alimenta niños, equipa talleres y sostiene los programas. Desde cualquier monto, tu dinero transforma vidas.',
+    ctaTexto: 'Ver cómo donar',
+    ctaHref: '#donaciones',
+    ctaExterno: false,
+    colorClass: 'card--accent',
+  },
+  {
+    emoji: '🙌',
+    emojiLabel: 'Manos en alto',
+    titulo: 'Ser voluntario',
+    descripcion:
+      '¿Tienes un sábado libre? Ven a servir. Necesitamos cocineros, tutores, líderes y personas con ganas de amar a su comunidad.',
+    ctaTexto: 'Contáctanos',
+    ctaHref: SITE.whatsapp.link,
+    ctaExterno: true,
+    colorClass: 'card--support',
+  },
+  {
+    emoji: '🕊️',
+    emojiLabel: 'Paloma de paz',
+    titulo: 'Orar',
+    descripcion:
+      'Cree con nosotros. Ora por las familias del barrio, por los niños, por los jóvenes y por quienes sirven cada semana. La oración mueve montañas.',
+    ctaTexto: null,
+    ctaHref: null,
+    ctaExterno: false,
+    colorClass: 'card--primary',
+  },
+  {
+    emoji: '🤝',
+    emojiLabel: 'Apretón de manos',
+    titulo: 'Alianzas',
+    descripcion:
+      '¿Tienes una empresa, iglesia u organización? Podemos construir juntos. Las alianzas estratégicas nos permiten llegar más lejos.',
+    ctaTexto: 'Escríbenos',
+    ctaHref: SITE.whatsapp.link,
+    ctaExterno: true,
+    colorClass: 'card--secondary',
+  },
+];
+---
+
+<section class="como-ayudar" id="como-ayudar" aria-label="Cómo puedes ayudar">
+  <div class="container">
+    <!-- Encabezado -->
+    <SectionTitle
+      eyebrow="Únete"
+      title="¿Cómo puedes ayudar?"
+      subtitle="Hay muchas formas de ser parte de la transformación. Encuentra la tuya."
+    />
+
+    <!-- Grid de cards -->
+    <div class="ayudar__grid">
+      {cards.map((card) => (
+        <article class:list={['ayudar-card', card.colorClass]}>
+          <!-- Ícono en círculo -->
+          <div class="ayudar-card__icon" aria-label={card.emojiLabel} role="img">
+            {card.emoji}
+          </div>
+
+          <!-- Texto -->
+          <h3 class="ayudar-card__titulo">{card.titulo}</h3>
+          <p class="ayudar-card__desc">{card.descripcion}</p>
+
+          <!-- CTA o badge -->
+          {card.ctaTexto && card.ctaHref ? (
+            <div class="ayudar-card__footer">
+              <Button
+                href={card.ctaHref}
+                variant="secondary"
+                size="sm"
+                {...(card.ctaExterno ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >
+                {card.ctaTexto}
+              </Button>
+            </div>
+          ) : (
+            <div class="ayudar-card__footer">
+              <span class="ayudar-card__badge">Únete en oración</span>
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ---- Sección base ---- */
+  .como-ayudar {
+    background-color: var(--color-cream);
+    padding-block: var(--space-16);
+  }
+
+  @media (min-width: 1024px) {
+    .como-ayudar {
+      padding-block: var(--space-20);
+    }
+  }
+
+  /* ---- Grid ---- */
+  .ayudar__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    margin-top: var(--space-10);
+  }
+
+  @media (min-width: 480px) {
+    .ayudar__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .ayudar__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* ---- Card base ---- */
+  .ayudar-card {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform var(--transition-base),
+      box-shadow var(--transition-base);
+  }
+
+  .ayudar-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* ---- Ícono ---- */
+  .ayudar-card__icon {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    flex-shrink: 0;
+  }
+
+  /* Colores de ícono por variante */
+  .card--accent .ayudar-card__icon {
+    background-color: rgba(255, 211, 112, 0.25);
+  }
+
+  .card--support .ayudar-card__icon {
+    background-color: rgba(139, 199, 173, 0.25);
+  }
+
+  .card--primary .ayudar-card__icon {
+    background-color: rgba(63, 78, 181, 0.12);
+  }
+
+  .card--secondary .ayudar-card__icon {
+    background-color: rgba(247, 90, 59, 0.12);
+  }
+
+  /* ---- Título ---- */
+  .ayudar-card__titulo {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--font-extrabold);
+    color: var(--color-text);
+    line-height: 1.2;
+    max-width: none;
+  }
+
+  /* ---- Descripción ---- */
+  .ayudar-card__desc {
+    font-size: var(--text-sm);
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    max-width: 30ch;
+    flex: 1;
+  }
+
+  @media (min-width: 768px) {
+    .ayudar-card__desc {
+      font-size: var(--text-base);
+    }
+  }
+
+  /* ---- Footer ---- */
+  .ayudar-card__footer {
+    margin-top: auto;
+    padding-top: var(--space-2);
+  }
+
+  /* Badge "Únete en oración" */
+  .ayudar-card__badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    color: var(--color-primary);
+    opacity: 0.75;
+    gap: var(--space-1);
+  }
+
+  .ayudar-card__badge::before {
+    content: '✦';
+    font-size: 0.6em;
+    opacity: 0.6;
+  }
+
+  /* ---- Animaciones ---- */
+  @media (prefers-reduced-motion: no-preference) {
+    .ayudar-card {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: slide-up 500ms ease forwards;
+    }
+
+    .ayudar-card:nth-child(1) { animation-delay: 50ms; }
+    .ayudar-card:nth-child(2) { animation-delay: 130ms; }
+    .ayudar-card:nth-child(3) { animation-delay: 210ms; }
+    .ayudar-card:nth-child(4) { animation-delay: 290ms; }
+
+    @keyframes slide-up {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+</style>
