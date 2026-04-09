@@ -18,7 +18,7 @@ export const PROGRAMAS: Programa[] = [
     id: 'comedor',
     titulo: 'Comedor Comunitario',
     descripcion:
-      'Brindamos alimentación nutritiva a niños y adultos mayores de nuestra comunidad, dos veces por semana. Más de 800 raciones al mes que son también un abrazo y un momento de dignidad.',
+      'Brindamos alimentación nutritiva a niños y adultos mayores de nuestra comunidad, dos veces por semana. Más de 700 raciones al mes que son también un abrazo y un momento de dignidad.',
     icon: '🍽️',
     foto: 'nina-almuerzo-sonrisa.jpg',
     tag: 'Amor práctico',
@@ -45,7 +45,7 @@ export const PROGRAMAS: Programa[] = [
     id: 'familias',
     titulo: 'Restauración Familiar',
     descripcion:
-      'Talleres para padres, consejería y acompañamiento familiar. Creemos que cuando una familia es restaurada, todo el barrio cambia. Más de 200 familias los sábados.',
+      'Talleres para padres, consejería y acompañamiento familiar. Creemos que cuando una familia es restaurada, todo el barrio cambia. Entre 200 y 300 personas se reúnen cada sábado.',
     icon: '🏠',
     foto: 'mesa-familiar.jpg',
     tag: 'Familias',
