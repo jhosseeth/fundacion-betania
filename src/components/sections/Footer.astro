@@ -25,10 +25,10 @@ const navLinks = [
       <div class="footer__brand">
         <a href="#inicio" class="footer__logo-link" aria-label="Volver al inicio — Fundación Betania">
           <img
-            src="/logo.png"
+            src="/logo-footer.jpg"
             alt="Fundación Betania"
-            width="48"
-            height="48"
+            width="80"
+            height="80"
             loading="lazy"
             class="footer__logo"
           />
@@ -225,10 +225,11 @@ const navLinks = [
   }
 
   .footer__logo {
-    height: 48px;
-    width: auto;
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
     display: block;
-    border-radius: var(--radius-lg);
+    border-radius: 16px;
   }
 
   .footer__tagline {
