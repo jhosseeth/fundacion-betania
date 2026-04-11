@@ -16,7 +16,6 @@ interface Documento {
   descripcion: string;
   archivo: string;
   peso: string;
-  fecha: string;
 }
 
 const documentos: Documento[] = [
@@ -27,7 +26,6 @@ const documentos: Documento[] = [
       'Registro oficial ante la DIAN. Identifica a Fundación Betania Integral Colombia como entidad sin ánimo de lucro.',
     archivo: '/docs/rut.pdf',
     peso: '270 KB',
-    fecha: '2024',
   },
   {
     id: 'estatutos',
@@ -36,7 +34,6 @@ const documentos: Documento[] = [
       'Documento fundacional que rige el objeto social, la estructura orgánica y el funcionamiento de la fundación.',
     archivo: '/docs/estatutos.pdf',
     peso: '301 KB',
-    fecha: '2024',
   },
   {
     id: 'acta-constitucion',
@@ -45,7 +42,6 @@ const documentos: Documento[] = [
       'Acta de la asamblea fundacional. Certifica el origen legal de Fundación Betania Integral Colombia.',
     archivo: '/docs/acta-constitucion.pdf',
     peso: '322 KB',
-    fecha: '2024',
   },
   {
     id: 'certificacion-antecedentes',
@@ -54,7 +50,6 @@ const documentos: Documento[] = [
       'Certificado de antecedentes judiciales de los representantes legales de la fundación.',
     archivo: '/docs/certificacion-antecedentes.pdf',
     peso: '9.4 MB',
-    fecha: '2024',
   },
   {
     id: 'certificacion-bancaria',
@@ -63,7 +58,6 @@ const documentos: Documento[] = [
       'Certifica la cuenta de ahorros oficial de la fundación en Bancolombia. NIT 902051724.',
     archivo: '/docs/certificacion-bancaria.pdf',
     peso: '212 KB',
-    fecha: '2024',
   },
   {
     id: 'balance-apertura',
@@ -72,7 +66,6 @@ const documentos: Documento[] = [
       'Estado financiero de apertura (FBIC). Refleja la situación patrimonial inicial de la fundación.',
     archivo: '/docs/balance-apertura.pdf',
     peso: '359 KB',
-    fecha: '2024',
   },
 ];
 ---
@@ -169,8 +162,6 @@ const documentos: Documento[] = [
                 <p class="transp-card__description">{doc.descripcion}</p>
                 <p class="transp-card__meta">
                   <span class="transp-card__size">{doc.peso}</span>
-                  <span class="transp-card__sep" aria-hidden="true">&middot;</span>
-                  <span class="transp-card__date">{doc.fecha}</span>
                 </p>
               </div>
 
