@@ -1,0 +1,559 @@
+---
+// transparencia.astro — Página de documentación legal y transparencia institucional
+// URL: /transparencia
+// Propósito: Cumplimiento DIAN — Régimen Especial Tributario
+// Funcionarios de la DIAN encuentran todos los documentos directamente, sin fricción.
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NavBarSimple from '../components/sections/NavBarSimple.astro';
+import Footer from '../components/sections/Footer.astro';
+
+const lastUpdated = 'Abril 2025';
+
+interface Documento {
+  id: string;
+  nombre: string;
+  descripcion: string;
+  archivo: string;
+  peso: string;
+  fecha: string;
+}
+
+const documentos: Documento[] = [
+  {
+    id: 'rut',
+    nombre: 'RUT — Registro Único Tributario',
+    descripcion:
+      'Registro oficial ante la DIAN. Identifica a Fundación Betania Integral Colombia como entidad sin ánimo de lucro.',
+    archivo: '/docs/rut.pdf',
+    peso: '270 KB',
+    fecha: '2024',
+  },
+  {
+    id: 'estatutos',
+    nombre: 'Estatutos de la Fundación',
+    descripcion:
+      'Documento fundacional que rige el objeto social, la estructura orgánica y el funcionamiento de la fundación.',
+    archivo: '/docs/estatutos.pdf',
+    peso: '301 KB',
+    fecha: '2024',
+  },
+  {
+    id: 'acta-constitucion',
+    nombre: 'Acta de Constitución',
+    descripcion:
+      'Acta de la asamblea fundacional. Certifica el origen legal de Fundación Betania Integral Colombia.',
+    archivo: '/docs/acta-constitucion.pdf',
+    peso: '322 KB',
+    fecha: '2024',
+  },
+  {
+    id: 'certificacion-antecedentes',
+    nombre: 'Certificación de Antecedentes Judiciales',
+    descripcion:
+      'Certificado de antecedentes judiciales de los representantes legales de la fundación.',
+    archivo: '/docs/certificacion-antecedentes.pdf',
+    peso: '9.4 MB',
+    fecha: '2024',
+  },
+  {
+    id: 'certificacion-bancaria',
+    nombre: 'Certificación Bancaria',
+    descripcion:
+      'Certifica la cuenta de ahorros oficial de la fundación en Bancolombia. NIT 902051724.',
+    archivo: '/docs/certificacion-bancaria.pdf',
+    peso: '212 KB',
+    fecha: '2024',
+  },
+  {
+    id: 'balance-apertura',
+    nombre: 'Balance Inicial de Apertura',
+    descripcion:
+      'Estado financiero de apertura (FBIC). Refleja la situación patrimonial inicial de la fundación.',
+    archivo: '/docs/balance-apertura.pdf',
+    peso: '359 KB',
+    fecha: '2024',
+  },
+];
+---
+
+<BaseLayout
+  title="Transparencia y Documentos Legales"
+  description="Documentos legales e institucionales de Fundación Betania Integral Colombia — NIT 902051724. RUT, estatutos, acta de constitución, certificaciones y balance disponibles para descarga en PDF."
+>
+  <NavBarSimple />
+
+  <main id="main-content">
+
+    <!-- ════════════ HERO ════════════ -->
+    <section class="transp-hero" aria-labelledby="transp-heading">
+      <div class="container transp-hero__inner">
+
+        <p class="transp-eyebrow">
+          <span class="transp-eyebrow__dot" aria-hidden="true"></span>
+          Documentación Institucional
+        </p>
+
+        <h1 class="transp-title" id="transp-heading">Transparencia</h1>
+
+        <p class="transp-subtitle">
+          Fundación Betania Integral Colombia &mdash; NIT&nbsp;902.051.724 &mdash;
+          pone a disposición del público sus documentos legales e institucionales.
+          Todos los archivos pueden descargarse directamente en formato PDF.
+        </p>
+
+        <div class="transp-trust-bar" role="complementary" aria-label="Información institucional">
+
+          <span class="transp-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            Actualizado: {lastUpdated}
+          </span>
+
+          <span class="transp-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            Entidad sin ánimo de lucro
+          </span>
+
+          <span class="transp-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Medellín, Antioquia, Colombia
+          </span>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ DOCUMENTOS ════════════ -->
+    <section class="transp-docs" aria-labelledby="docs-heading">
+      <div class="container">
+
+        <h2 class="transp-docs__heading" id="docs-heading">Documentos disponibles</h2>
+
+        <ul class="transp-grid" role="list">
+          {documentos.map((doc) => (
+            <li class="transp-card" id={doc.id}>
+
+              <!-- Icono + badge PDF -->
+              <div class="transp-card__icon-area" aria-hidden="true">
+                <svg class="transp-card__pdf-icon" width="36" height="36" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="1.5"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
+                <span class="transp-card__pdf-badge">PDF</span>
+              </div>
+
+              <!-- Cuerpo textual -->
+              <div class="transp-card__body">
+                <h3 class="transp-card__title">{doc.nombre}</h3>
+                <p class="transp-card__description">{doc.descripcion}</p>
+                <p class="transp-card__meta">
+                  <span class="transp-card__size">{doc.peso}</span>
+                  <span class="transp-card__sep" aria-hidden="true">&middot;</span>
+                  <span class="transp-card__date">{doc.fecha}</span>
+                </p>
+              </div>
+
+              <!-- Botón de descarga -->
+              <a
+                href={doc.archivo}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="transp-card__btn"
+                aria-label={`Descargar ${doc.nombre} (PDF, ${doc.peso}) — abre en nueva pestaña`}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Descargar
+              </a>
+
+            </li>
+          ))}
+        </ul>
+
+      </div>
+    </section>
+
+    <!-- ════════════ CONTACTO ════════════ -->
+    <section class="transp-contact" aria-labelledby="transp-contact-heading">
+      <div class="container transp-contact__inner">
+        <h2 class="transp-contact__heading" id="transp-contact-heading">
+          ¿Necesitas más información?
+        </h2>
+        <p class="transp-contact__text">
+          Para consultas relacionadas con nuestra documentación legal, auditorías
+          o informes adicionales, contáctanos directamente.
+        </p>
+        <a
+          href="mailto:fundacionbetaniaintegral@gmail.com"
+          class="transp-contact__btn"
+          aria-label="Enviar correo electrónico a Fundación Betania"
+        >
+          fundacionbetaniaintegral@gmail.com
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+
+</BaseLayout>
+
+<style>
+  /* ════ Página base ════ */
+  main {
+    background-color: var(--color-cream);
+  }
+
+  /* ════ HERO ════ */
+  .transp-hero {
+    background-color: var(--color-primary);
+    padding-block: var(--space-16) var(--space-20);
+  }
+
+  @media (min-width: 768px) {
+    .transp-hero {
+      padding-block: var(--space-20) var(--space-24);
+    }
+  }
+
+  .transp-hero__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    max-width: 780px;
+  }
+
+  /* Eyebrow */
+  .transp-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    max-width: none;
+  }
+
+  .transp-eyebrow__dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  /* H1 */
+  .transp-title {
+    font-family: var(--font-display);
+    font-weight: var(--font-extrabold);
+    font-size: clamp(2.25rem, 6vw, 4rem);
+    line-height: 1.1;
+    color: #ffffff;
+    max-width: none;
+  }
+
+  /* Subtítulo */
+  .transp-subtitle {
+    font-size: var(--text-base);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 60ch;
+  }
+
+  @media (min-width: 768px) {
+    .transp-subtitle {
+      font-size: var(--text-lg);
+    }
+  }
+
+  /* Trust bar */
+  .transp-trust-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4) var(--space-6);
+    margin-top: var(--space-2);
+    padding-top: var(--space-5);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .transp-trust-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.7);
+    max-width: none;
+  }
+
+  .transp-trust-item svg {
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  /* ════ DOCUMENTOS ════ */
+  .transp-docs {
+    padding-block: var(--space-16);
+  }
+
+  @media (min-width: 1024px) {
+    .transp-docs {
+      padding-block: var(--space-20);
+    }
+  }
+
+  .transp-docs__heading {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-8);
+    max-width: none;
+  }
+
+  /* Grid responsive 1→2→3 col */
+  .transp-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .transp-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-5);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .transp-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+  }
+
+  /* ════ CARD ════ */
+  .transp-card {
+    background-color: #ffffff;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    border: 1.5px solid transparent;
+    transition:
+      box-shadow var(--transition-base),
+      border-color var(--transition-base),
+      transform var(--transition-base);
+  }
+
+  .transp-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: rgba(63, 78, 181, 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Icono + badge */
+  .transp-card__icon-area {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .transp-card__pdf-icon {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .transp-card__pdf-badge {
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    background-color: rgba(63, 78, 181, 0.1);
+    border-radius: var(--radius-full);
+    padding: var(--space-1) var(--space-3);
+    line-height: 1.6;
+  }
+
+  /* Cuerpo */
+  .transp-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    flex: 1;
+  }
+
+  .transp-card__title {
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: var(--font-bold);
+    color: var(--color-text);
+    line-height: 1.3;
+    max-width: none;
+  }
+
+  @media (min-width: 768px) {
+    .transp-card__title {
+      font-size: var(--text-lg);
+    }
+  }
+
+  .transp-card__description {
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    max-width: none;
+  }
+
+  .transp-card__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin-top: var(--space-1);
+    max-width: none;
+  }
+
+  .transp-card__sep {
+    opacity: 0.5;
+  }
+
+  /* Botón de descarga */
+  .transp-card__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    min-height: 44px;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition:
+      background-color var(--transition-fast),
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast);
+    margin-top: var(--space-2);
+  }
+
+  .transp-card__btn:hover {
+    background-color: #2f3d9e;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+    color: #ffffff;
+  }
+
+  .transp-card__btn:active {
+    transform: scale(0.98);
+  }
+
+  /* ════ CONTACTO ════ */
+  .transp-contact {
+    background-color: var(--color-cream-dark);
+    padding-block: var(--space-16);
+  }
+
+  .transp-contact__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-5);
+    max-width: 600px;
+    margin-inline: auto;
+  }
+
+  .transp-contact__heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: var(--font-extrabold);
+    color: var(--color-text);
+    max-width: none;
+  }
+
+  .transp-contact__text {
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    max-width: 52ch;
+  }
+
+  .transp-contact__btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding: var(--space-3) var(--space-6);
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-family: var(--font-display);
+    font-weight: var(--font-bold);
+    font-size: var(--text-base);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition:
+      background-color var(--transition-fast),
+      box-shadow var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .transp-contact__btn:hover {
+    background-color: #2f3d9e;
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+    color: #ffffff;
+  }
+
+  /* ════ Reduced motion ════ */
+  @media (prefers-reduced-motion: reduce) {
+    .transp-card,
+    .transp-card__btn,
+    .transp-contact__btn {
+      transition: none;
+      transform: none !important;
+    }
+  }
+</style>
